@@ -11,7 +11,6 @@ setup(
     entry_points={
         "bard.init": [],
         "console_scripts": ["bard = bard.manage:cli"],
-    },
-    tests_require=["coverage", "nose"],
+    }
 )
 

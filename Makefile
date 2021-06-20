@@ -14,7 +14,10 @@ shell: services
 	$(APPDOCKER) /bin/bash
 
 web: services
-	$(COMPOSE) up api ui
+	$(COMPOSE) up api
+
+# web: services
+# 	$(COMPOSE) up api ui
 
 services:
 	$(COMPOSE) up -d --remove-orphans \

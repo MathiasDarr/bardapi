@@ -3,23 +3,14 @@ from sqlalchemy import MetaData, inspect
 from sqlalchemy.exc import InternalError
 from sqlalchemy.dialects.postgresql import ENUM
 
-from bard.logic.collections import create_collection
 from bard.app import db
 
-
 def seed_data():
-    collection = create_collection({"label": "Third_collection"})
-    data = {
-        "a": "sec"
-    }
+    pass
 
 def upgrade_system():
-
     flask_migrate.upgrade()
-
-    #upgrade_search()
     seed_data()
-
 
 def destroy_db():
     metadata = MetaData()

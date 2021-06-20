@@ -1,9 +1,31 @@
+from flask import Blueprint, request, jsonify
 import logging
-from flask import Blueprint, request, current_app
+from bard.logic.collections import create_collection
+from bard.app import db
 
 log = logging.getLogger(__name__)
-api = Blueprint("api", __name__)
 
-@api.route('/')
+blueprint = Blueprint("collections_api", __name__)
+
+@blueprint.route("/", methods=["GET"])
 def index():
-    return "<b>Bard</b>"
+    """
+    List of collections
+    """
+    return "hello"
+
+@blueprint.route("/create", methods=["POST", "PUT"])
+def create():
+    return "not hot reloaddf dfad "
+    # request_data = request.get_json()
+    #
+    # # summary = request_data['summary']
+    # label = request_data['label']
+    #
+    # collection = create_collection(data=request_data)
+    # resp_dictionary = {
+    #     "collection_id": collection.id,
+    #     "label": collection.label
+    # }
+    # return jsonify(resp_dictionary)
+
