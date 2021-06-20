@@ -3,12 +3,15 @@ from setuptools import setup, find_packages
 setup(
     name="bard",
     version="3.9.11",
-    description="Packaging a Flask application",
+    description="Packaging bardapi ",
     author="Mathias Darr",
     author_email="dakobedbard@gmail.com",
-    url="https://github.com/MathiasDarr/dakobed_flask",
+    url="https://github.com/MathiasDarr/bardapi",
     packages=find_packages(),
-    install_requires=["pyyaml"],
-    tests_require=["pytest"]
+    entry_points={
+        "bard.init": [],
+        "console_scripts": ["bard = bard.manage:cli"],
+    },
+    tests_require=["coverage", "nose"],
 )
 
