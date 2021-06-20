@@ -19,12 +19,30 @@ services:
     #image: barddata/bard:${BARD_TAG:-latest}
 #    command: bard run -h 0.0.0.0 -p 5000 --with-threads --reload --debugger
     ports:
-      - "8080:8080"
+      - "127.0.0.1:5000:5000"
+
     restart: on-failure
     depends_on:
       - postgres
     volumes:
       - "./api:/usr/src/app/api"
+
+
+  ui:
+    build:
+      context: ui
+#    image: dakobedio/dakobed-ui:${DAKOBED_TAG:-latest}
+#    depends_on:
+#      - api
+    command: npm run start
+    ports:
+      - "127.0.0.1:8080:8080"
+    volumes:
+      - "./ui/src:/dakobedui/src"
+      - "./ui/package.json:/dakobedui/package.json"
+    environment:
+      PORT: "8080"
+      CI: "true"
 
 volumes:
   archive-data: {}
