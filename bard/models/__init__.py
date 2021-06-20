@@ -1,0 +1,1 @@
+from bard.models.collection import Collection
