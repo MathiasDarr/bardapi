@@ -25,6 +25,7 @@ services:
     environment:
       DAKOBED_DEBUG: "true"
       DAKOBED_SECRET_KEY: "development"
+      BARD_DATABASE_URI: "postgresql://bard:bard@postgres:5432/bard"
     volumes:
       - archive-data:/data
       - "./bard:/bard/bard"
@@ -49,24 +50,23 @@ services:
       DAKOBED_DEBUG: "true"
       DAKOBED_PROFILE: "false"
       DAKOBED_SECRET_KEY: "development"
+      BARD_DATABASE_URI: "postgresql://bard:bard@postgres:5432/bard"
 
-
-
-#  ui:
-#    build:
-#      context: ui
-##    image: dakobedio/dakobed-ui:${DAKOBED_TAG:-latest}
-##    depends_on:
-##      - api
-#    command: npm run start
-#    ports:
-#      - "127.0.0.1:8080:8080"
-#    volumes:
-#      - "./ui/src:/dakobedui/src"
-#      - "./ui/package.json:/dakobedui/package.json"
-#    environment:
-#      PORT: "8080"
-#      CI: "true"
+  ui:
+    build:
+      context: ui
+#    image: dakobedio/dakobed-ui:${DAKOBED_TAG:-latest}
+#    depends_on:
+#      - api
+    command: npm run start
+    ports:
+      - "127.0.0.1:8080:8080"
+    volumes:
+      - "./ui/src:/dakobedui/src"
+      - "./ui/package.json:/dakobedui/package.json"
+    environment:
+      PORT: "8080"
+      CI: "true"
 
 volumes:
   archive-data: {}

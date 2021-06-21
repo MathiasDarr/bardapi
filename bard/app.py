@@ -6,8 +6,6 @@ from flask_cors import CORS
 
 from bard import settings
 
-
-
 NONE = "'none'"
 log = logging.getLogger(__name__)
 db = SQLAlchemy()
@@ -17,7 +15,7 @@ migrate = Migrate()
 def create_app(config={}):
 
     app = Flask("bard")
-    app.config.from_object(settings)
+    app.config.from_object(config)
     app.config.update(config)
 
     if "postgres" not in settings.DATABASE_URI:

@@ -16,8 +16,6 @@ def seed_data():
 def upgrade_system():
 
     flask_migrate.upgrade()
-
-    #upgrade_search()
     seed_data()
 
 

@@ -23,3 +23,5 @@ services:
 	$(COMPOSE) up -d --remove-orphans \
 		$(SERVICES_CONTAINERS)
 
+test:
+	$(APPDOCKER) contrib/test.sh

@@ -29,7 +29,7 @@ class Collection(db.Model, IdModel):
         data = self.to_dict_dates()
         data.update(
             {
-                "id": str(self.id),
+                # "id": str(self.id),
                 "collection_id": str(self.id),
             }
         )
@@ -37,6 +37,4 @@ class Collection(db.Model, IdModel):
 
     def __repr__(self):
         return '<Collection %r>' % self.label
-
-
 
