@@ -13,20 +13,44 @@ services:
       POSTGRES_PASSWORD: bard
       POSTGRES_DATABASE: bard
 
+  app:
+    build:
+      context: .
+    #image: barddata/bard:${BARD_TAG:-latest}
+    hostname: bard
+    command: /bin/bash
+    depends_on:
+      - postgres
+    tmpfs: /tmp
+    environment:
+      DAKOBED_DEBUG: "true"
+      DAKOBED_SECRET_KEY: "development"
+      BARD_DATABASE_URI: "postgresql://bard:bard@postgres:5432/bard"
+    volumes:
+      - archive-data:/data
+      - "./bard:/bard/bard"
+      - "~:/host"
+    cap_add:
+      - SYS_PTRACE
+
   api:
     build:
       context: .
     #image: barddata/bard:${BARD_TAG:-latest}
-#    command: bard run -h 0.0.0.0 -p 5000 --with-threads --reload --debugger
+    #command: bard run -h 0.0.0.0 -p 5000 --with-threads --reload --debugger
+    command: gunicorn --workers 2 --timeout 90 --bind 0.0.0:5000 --access-logfile - wsgi:application --reload
     ports:
       - "127.0.0.1:5000:5000"
-
     restart: on-failure
     depends_on:
       - postgres
     volumes:
-      - "./api:/usr/src/app/api"
-
+      - "./bard:/bard/bard"
+    environment:
+      DAKOBED_DEBUG: "true"
+      DAKOBED_PROFILE: "false"
+      DAKOBED_SECRET_KEY: "development"
+      BARD_DATABASE_URI: "postgresql://bard:bard@postgres:5432/bard"
 
   ui:
     build:

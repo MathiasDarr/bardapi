@@ -1,6 +1,6 @@
 import pytest
 
-from api.app import create_app
+from bard.app import create_app
 
 @pytest.fixture()
 def app():
